@@ -15,12 +15,10 @@ export default {
 </script>
 
 <style>
-#app {
+body {
+  background-image: linear-gradient(rgb(192, 193, 255), rgb(255, 192, 213));
+  background-attachment: fixed;
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
