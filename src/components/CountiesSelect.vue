@@ -1,9 +1,14 @@
 <template>
-  <h1>Megyek és Városai</h1>
-  <select class="form-select" aria-label="Default select example">
-    <option selected disabled>Válassz egy megyét...</option>
-    <option v-for="data in datas" :key="data">{{ data.name }}</option>
-  </select>
+  <h2 class="m-4">Megyék és Városaik</h2>
+  <div class="input-group mx-auto d-flex justify-content-center">
+    <label class="input-group-text" for="inputGroupSelect01"
+      >Válassz egy megyét</label
+    >
+    <select class="form-select">
+      <option selected disabled>Megyék...</option>
+      <option v-for="data in datas" :key="data">{{ data.name }}</option>
+    </select>
+  </div>
 </template>
 
 <script>
