@@ -1,20 +1,15 @@
 <template>
-  <div id="hello">
-    <h1>{{ msg }}</h1>
-    <div v-for="data in datas" :key="data">
-      <h2>Felhasználó: {{ data.name }}</h2>
-      <h3>Üzenet: {{ data.message }}</h3>
-    </div>
-  </div>
+  <h1>Megyek és Városai</h1>
+  <select class="form-select" aria-label="Default select example">
+    <option selected disabled>Válassz egy megyét...</option>
+    <option v-for="data in datas" :key="data">{{ data.name }}</option>
+  </select>
 </template>
 
 <script>
 import axios from "axios";
 
 export default {
-  props: {
-    msg: String,
-  },
   data() {
     return {
       datas: [],
@@ -26,7 +21,7 @@ export default {
   methods: {
     fetchData() {
       axios
-        .get(`http://127.0.0.1:8000/api/message`)
+        .get(`http://127.0.0.1:8000/api/counties`)
         .then((response) => {
           this.datas = response.data.data;
         })
@@ -40,7 +35,8 @@ export default {
 
 <style scoped>
 #hello {
-  background-color: yellowgreen;
+  font-size: 25px;
+  background-color: lightgreen;
   color: purple;
 }
 </style>

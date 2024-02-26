@@ -1,15 +1,14 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello World!" />
+  <CountiesSelect />
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import CountiesSelect from "./components/CountiesSelect.vue";
 
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    CountiesSelect,
   },
 };
 </script>
