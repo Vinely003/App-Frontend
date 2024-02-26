@@ -27,6 +27,7 @@
 import axios from "axios";
 
 export default {
+  props: ["county_id"],
   data() {
     return {
       cityName: "",
@@ -36,7 +37,8 @@ export default {
     async newCity() {
       try {
         await axios.post("http://127.0.0.1:8000/api/newcity", {
-          cityName: this.cityName,
+          id: 1,
+          name: this.cityName,
         });
       } catch (error) {
         console.error("Hiba történt a város küldésekor:", error);

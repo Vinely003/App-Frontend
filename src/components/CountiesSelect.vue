@@ -6,7 +6,9 @@
     >
     <select class="form-select">
       <option selected disabled>Megyék...</option>
-      <option v-for="data in datas" :key="data">{{ data.name }}</option>
+      <option v-for="data in datas" :key="data">
+        {{ data.name }}
+      </option>
     </select>
   </div>
 </template>
