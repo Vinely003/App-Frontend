@@ -28,12 +28,16 @@ import axios from "axios";
 
 export default {
   props: {
-    county_id: String,
+    county_id: Number,
   },
   data() {
     return {
       cityName: "",
     };
+  },
+  afterUpdated() {
+    this.fetchData();
+    this.cityName = "";
   },
   methods: {
     async newCity() {
@@ -49,5 +53,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>

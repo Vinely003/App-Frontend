@@ -11,18 +11,28 @@
       </option>
     </select>
   </div>
-  <div v-if="county_id !== null">
-    <NewCities :county_id="county_id" />
-  </div>
+  <transition
+    @beforeEnter="beforeEnter"
+    @enter="enter"
+    @beforeLeave="beforLeave"
+    @leave="leave"
+  >
+    <div v-if="county_id !== null">
+      <NewCities :county_id="county_id" />
+      <CityTable :county_id="county_id" />
+    </div>
+  </transition>
 </template>
 
 <script>
 import axios from "axios";
 import NewCities from "./NewCities.vue";
+import CityTable from "./CityTable.vue";
 
 export default {
   components: {
     NewCities,
+    CityTable,
   },
   data() {
     return {
@@ -43,6 +53,20 @@ export default {
         .catch((error) => {
           console.error("Hiba történt:", error);
         });
+    },
+    beforeEnter(el) {
+      el.style.opacity = 0;
+    },
+    enter(el, done) {
+      let opacity = 0;
+      const interval = setInterval(() => {
+        el.style.opacity = opacity;
+        opacity += 0.1;
+        if (opacity >= 1) {
+          clearInterval(interval);
+          done();
+        }
+      }, 60);
     },
   },
 };
