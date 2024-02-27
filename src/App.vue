@@ -1,17 +1,14 @@
 <template>
   <CountiesSelect />
-  <NewCities />
 </template>
 
 <script>
 import CountiesSelect from "./components/CountiesSelect.vue";
-import NewCities from "./components/NewCities.vue";
 
 export default {
   name: "App",
   components: {
     CountiesSelect,
-    NewCities,
   },
 };
 </script>

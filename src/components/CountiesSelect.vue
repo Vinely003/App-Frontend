@@ -4,22 +4,30 @@
     <label class="input-group-text" for="inputGroupSelect01"
       >Válassz egy megyét</label
     >
-    <select class="form-select">
-      <option selected disabled>Megyék...</option>
-      <option v-for="data in datas" :key="data">
+    <select class="form-select" v-model="county_id">
+      <option :value="null" selected disabled>Megyék...</option>
+      <option v-for="data in datas" :key="data.id" :value="data.id">
         {{ data.name }}
       </option>
     </select>
+  </div>
+  <div v-if="county_id !== null">
+    <NewCities :county_id="county_id" />
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import NewCities from "./NewCities.vue";
 
 export default {
+  components: {
+    NewCities,
+  },
   data() {
     return {
       datas: [],
+      county_id: null,
     };
   },
   mounted() {
