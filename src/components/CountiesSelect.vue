@@ -11,12 +11,7 @@
       </option>
     </select>
   </div>
-  <transition
-    @beforeEnter="beforeEnter"
-    @enter="enter"
-    @beforeLeave="beforLeave"
-    @leave="leave"
-  >
+  <transition @beforeEnter="beforeEnter" @enter="enter">
     <div v-if="county_id !== null">
       <NewCities :county_id="county_id" />
       <CityTable :county_id="county_id" />
