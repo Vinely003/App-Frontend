@@ -71,7 +71,7 @@ export default {
       }
     },
     editCity(city) {
-      city.editing = true;
+      city.editing = !city.editing;
     },
     async updateCity(city) {
       try {
@@ -79,13 +79,13 @@ export default {
           name: city.newName,
         });
         city.name = city.newName;
-        city.editing = false;
+        city.editing = !city.editing;
       } catch (error) {
         console.error("Hiba történt a város frissítésekor:", error);
       }
     },
     cancelEdit(city) {
-      city.editing = false;
+      city.editing = !city.editing;
     },
   },
 };
