@@ -17,11 +17,7 @@
             <button @click="cancel" :cancel="data.id" class="btn btn-secondary">
               Cancel
             </button>
-            <button
-              @click="deleteCity"
-              :delete="data.id"
-              class="btn btn-danger"
-            >
+            <button @click="deleteCity(data.id)" class="btn btn-danger">
               Delete
             </button>
           </div>
@@ -40,18 +36,12 @@ export default {
   data() {
     return {
       datas: [],
-      delete: null,
       buttons: false,
     };
   },
   computed: {
     filteredCities() {
       return this.datas.filter((city) => city.county_id === this.county_id);
-    },
-  },
-  watch: {
-    delete(newdelete) {
-      console.log(newdelete);
     },
   },
   mounted() {
@@ -71,11 +61,10 @@ export default {
           console.error("Hiba történt:", error);
         });
     },
-    async deleteCity() {
+    async deleteCity(cityId) {
       try {
-        await axios.delete("http://127.0.0.1:8000/api/destroy", {
-          id: this.delete,
-        });
+        await axios.delete(`http://127.0.0.1:8000/api/destroy/${cityId}`, {});
+        console.log(cityId);
       } catch (error) {
         console.error("Hiba történt a város küldésekor:", error);
       }
