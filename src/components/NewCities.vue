@@ -29,25 +29,21 @@ import axios from "axios";
 export default {
   props: {
     county_id: Number,
+    datas: Array,
   },
   data() {
     return {
       cityName: "",
-      datas: [],
     };
-  },
-  afterUpdated() {
-    this.fetchData();
-    this.cityName = "";
   },
   methods: {
     async newCity() {
       try {
-        const response = await axios.post("http://127.0.0.1:8000/api/cities", {
+        await axios.post("http://127.0.0.1:8000/api/cities", {
           name: this.cityName,
           county_id: this.county_id,
         });
-        this.datas.push(response.data);
+        this.cityName = "";
       } catch (error) {
         console.error("Hiba történt a város küldésekor:", error);
       }

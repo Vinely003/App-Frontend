@@ -13,7 +13,6 @@
   </div>
   <transition @beforeEnter="beforeEnter" @enter="enter">
     <div v-if="county_id !== null">
-      <NewCities :county_id="county_id" />
       <CityTable :county_id="county_id" />
     </div>
   </transition>
@@ -21,12 +20,10 @@
 
 <script>
 import axios from "axios";
-import NewCities from "./NewCities.vue";
 import CityTable from "./CityTable.vue";
 
 export default {
   components: {
-    NewCities,
     CityTable,
   },
   data() {

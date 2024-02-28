@@ -1,4 +1,5 @@
 <template>
+  <NewCities :county_id="county_id" :datas="datas" />
   <table class="table table-striped mx-auto text-center" style="width: 45%">
     <tbody>
       <tr v-for="data in filteredCities" :key="data.id">
@@ -26,8 +27,12 @@
 
 <script>
 import axios from "axios";
+import NewCities from "./NewCities.vue";
 
 export default {
+  components: {
+    NewCities,
+  },
   props: {
     county_id: Number,
   },
