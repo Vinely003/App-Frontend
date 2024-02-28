@@ -1,20 +1,17 @@
 <template>
-  <table class="table table-striped mx-auto" style="width: 45%">
+  <table class="table table-striped mx-auto text-center" style="width: 45%">
     <tbody>
       <tr v-for="data in filteredCities" :key="data.id">
         <th scope="row">
-          <div @click="showButtons">
+          <div v-if="!data.editing" @click="editCity(data)">
             {{ data.name }}
           </div>
-          <div v-if="buttons">
-            <button
-              @click="updateCity"
-              :update="data.id"
-              class="btn btn-primary"
-            >
+          <div v-else>
+            <input v-model="data.newName" />
+            <button @click="updateCity(data)" class="btn btn-primary">
               Update
             </button>
-            <button @click="cancel" :cancel="data.id" class="btn btn-secondary">
+            <button @click="cancelEdit(data)" class="btn btn-secondary">
               Cancel
             </button>
             <button @click="deleteCity(data.id)" class="btn btn-danger">
@@ -29,6 +26,7 @@
 
 <script>
 import axios from "axios";
+
 export default {
   props: {
     county_id: Number,
@@ -36,7 +34,6 @@ export default {
   data() {
     return {
       datas: [],
-      buttons: false,
     };
   },
   computed: {
@@ -55,7 +52,11 @@ export default {
       axios
         .get(`http://127.0.0.1:8000/api/cities`)
         .then((response) => {
-          this.datas = response.data.data;
+          this.datas = response.data.data.map((city) => ({
+            ...city,
+            editing: false,
+            newName: city.name,
+          }));
         })
         .catch((error) => {
           console.error("Hiba történt:", error);
@@ -63,11 +64,28 @@ export default {
     },
     async deleteCity(cityId) {
       try {
-        await axios.delete(`http://127.0.0.1:8000/api/cities/${cityId}`, {});
-        console.log(cityId);
+        await axios.delete(`http://127.0.0.1:8000/api/cities/${cityId}`);
+        this.datas = this.datas.filter((city) => city.id !== cityId);
       } catch (error) {
         console.error("Hiba történt a város küldésekor:", error);
       }
+    },
+    editCity(city) {
+      city.editing = true;
+    },
+    async updateCity(city) {
+      try {
+        await axios.put(`http://127.0.0.1:8000/api/cities/${city.id}`, {
+          name: city.newName,
+        });
+        city.name = city.newName;
+        city.editing = false;
+      } catch (error) {
+        console.error("Hiba történt a város frissítésekor:", error);
+      }
+    },
+    cancelEdit(city) {
+      city.editing = false;
     },
   },
 };

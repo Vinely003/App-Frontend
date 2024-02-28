@@ -33,6 +33,7 @@ export default {
   data() {
     return {
       cityName: "",
+      datas: [],
     };
   },
   afterUpdated() {
@@ -42,10 +43,11 @@ export default {
   methods: {
     async newCity() {
       try {
-        await axios.post("http://127.0.0.1:8000/api/cities", {
+        const response = await axios.post("http://127.0.0.1:8000/api/cities", {
           name: this.cityName,
           county_id: this.county_id,
         });
+        this.datas.push(response.data);
       } catch (error) {
         console.error("Hiba történt a város küldésekor:", error);
       }
