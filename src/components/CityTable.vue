@@ -53,7 +53,7 @@ export default {
     },
     fetchData() {
       axios
-        .get(`http://127.0.0.1:8000/api/citytable`)
+        .get(`http://127.0.0.1:8000/api/cities`)
         .then((response) => {
           this.datas = response.data.data;
         })
@@ -63,7 +63,7 @@ export default {
     },
     async deleteCity(cityId) {
       try {
-        await axios.delete(`http://127.0.0.1:8000/api/destroy/${cityId}`, {});
+        await axios.delete(`http://127.0.0.1:8000/api/cities/${cityId}`, {});
         console.log(cityId);
       } catch (error) {
         console.error("Hiba történt a város küldésekor:", error);
